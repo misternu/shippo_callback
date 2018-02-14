@@ -1,0 +1,8 @@
+<p>Order ID: <%= @order.id %></p>
+
+<p>Shipping Options:</p>
+<% @order.shipping_methods.each do |method| %>
+  <p><%= method.amount %> <%= method.description %></p>
+<% end %>
+
+<%= link_to 'Create New Order', orders_path, method: 'create' %>
