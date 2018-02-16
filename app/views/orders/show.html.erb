@@ -1,8 +1,10 @@
 <p>Order ID: <%= @order.id %></p>
 
 <p>Shipping Options:</p>
-<% @order.shipping_methods.each do |method| %>
-  <p><%= method.amount %> <%= method.description %></p>
-<% end %>
+<ul>
+  <% @order.shipping_methods.each do |method| %>
+    <li><%= method.amount %> <%= method.description %></li>
+  <% end %>
+</ul>
 
 <%= link_to 'Create New Order', orders_path, method: 'create' %>
