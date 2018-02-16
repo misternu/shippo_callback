@@ -9,6 +9,7 @@ class ShippingController < ApplicationController
         id: rate['object_id'],
         amount: (rate.amount.to_f * 100).to_i,
         currency: 'usd',
+        delivery_estimate: nil,
         description: "#{rate['provider']} #{rate['servicelevel']['name']}"
       }
     end
@@ -16,11 +17,17 @@ class ShippingController < ApplicationController
       id: 'pick_up-shipping',
       amount: 0,
       currency: 'usd',
+      delivery_estimate: nil,
       description: 'Pick Up'
     }
     shipping_methods.unshift(pick_up)
     # order = JSON.parse(request.body.read)['order']
     # JSON.parse(request.body.read)
-    render json: { order_update: { shipping_methods: shipping_methods } }
+    render json: {
+      order_update: {
+        items: [],
+        shipping_methods: shipping_methods
+      }
+    }
   end
 end
