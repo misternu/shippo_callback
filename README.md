@@ -9,3 +9,5 @@ In a settings page on Stripe, I changed my accounts shipping option to `callback
 ![Stripe Options](StripeOptions.png)
 
 The mockup is [here](https://shipping-callback-mockup.herokuapp.com/)
+
+You can read more about shipping dimensions [here](https://goshippo.com/docs/stripe#stripe-shipping-concepts)
