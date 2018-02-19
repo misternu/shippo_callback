@@ -9,6 +9,35 @@ class ShippoService
     )
   end
 
+  def create_shipment_and_rates
+    shipment = create_shipment
+    rates = convert_rates(shipment.rates)
+    rates.unshift(pick_up_option)
+    [shipment, rates]
+  end
+
+  def convert_rates(rates)
+    rates.map do |rate|
+      {
+        id: rate['object_id'],
+        amount: (rate.amount.to_f * 100).to_i,
+        currency: 'usd',
+        delivery_estimate: nil,
+        description: "#{rate['provider']} #{rate['servicelevel']['name']}"
+      }
+    end
+  end
+
+  def pick_up_option
+    {
+      id: 'pick_up-shipping',
+      amount: 0,
+      currency: 'usd',
+      delivery_estimate: nil,
+      description: 'Pick Up'
+    }
+  end
+
   def address_from
     {
       name: 'Back of the Yards Coffee',
