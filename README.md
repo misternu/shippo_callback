@@ -10,4 +10,15 @@ In a settings page on Stripe, I changed my accounts shipping option to `callback
 
 The mockup is [here](https://shipping-callback-mockup.herokuapp.com/)
 
-You can read more about shipping dimensions [here](https://goshippo.com/docs/stripe#stripe-shipping-concepts)
+
+## Stripe Resources:
+
+[Dynamic Shipping Calculation in the Orders API](https://stripe.com/docs/orders/dynamic-shipping-taxes)
+
+[Automated Shipping Calculations](https://stripe.com/docs/orders/shipping-integration#how-it-works)
+
+## Shippo Resources:
+
+[Create your first shipment](https://goshippo.com/docs/first-shipment)
+
+[Shipping on Stripe (includes info about shipping dimensions)](https://goshippo.com/docs/stripe#stripe-shipping-concepts)
