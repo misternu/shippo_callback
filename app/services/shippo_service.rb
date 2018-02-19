@@ -9,11 +9,11 @@ class ShippoService
     )
   end
 
-  def create_shipment_and_rates
-    shipment = create_shipment
+  def create_rates
+    p shipment = create_shipment
     rates = convert_rates(shipment.rates)
     rates.unshift(pick_up_option)
-    [shipment, rates]
+    rates
   end
 
   def convert_rates(rates)
