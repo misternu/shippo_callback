@@ -3,7 +3,7 @@ class OrdersController < ApplicationController
   def create
     order = nil
     begin
-      p order = StripeService.new.create_order
+      order = StripeService.new.create_order
     rescue Stripe::StripeError => e
       p e
     end

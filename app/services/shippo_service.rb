@@ -1,16 +1,22 @@
 # Class for making calls to the shippo service
 class ShippoService
+  def initialize(options = {})
+    @address_from = options.fetch(:address_from, fake_address_from)
+    @address_to = options.fetch(:address_to, fake_address_to)
+    @parcel = options[:items] ? create_parcel(items) : fake_parcel
+  end
+
   def create_shipment
     Shippo::Shipment.create(
-      address_from: address_from,
-      address_to: address_to,
-      parcels: parcel,
+      address_from: @address_from,
+      address_to: @address_to,
+      parcels: @parcel,
       async: false
     )
   end
 
   def create_rates
-    p shipment = create_shipment
+    shipment = create_shipment
     rates = convert_rates(shipment.rates)
     rates.unshift(pick_up_option)
     rates
@@ -38,7 +44,7 @@ class ShippoService
     }
   end
 
-  def address_from
+  def fake_address_from
     {
       name: 'Back of the Yards Coffee',
       street1: '2059 W 47th St',
@@ -49,7 +55,7 @@ class ShippoService
     }
   end
 
-  def address_to
+  def fake_address_to
     {
       name: 'Joe Public',
       street1: '222 W Merchandise Mart Plaza',
@@ -60,7 +66,7 @@ class ShippoService
     }
   end
 
-  def parcel
+  def fake_parcel
     {
       length: 5,
       width: 1,
@@ -69,5 +75,9 @@ class ShippoService
       weight: 2,
       mass_unit: :lb
     }
+  end
+
+  def create_parcel(items)
+    { items: items }
   end
 end
