@@ -5,14 +5,14 @@ class StripeService
       currency: 'usd',
       customer: 'cus_CHdv4NciT0Y1MA',
       items: fake_items,
-      :shipping => {
-        :name => 'Joe Public',
-        :address => {
-          :line1 => '222 W Merchandise Mart Plaza',
-          :city => 'Chicago',
-          :state => 'IL',
-          :country => 'US',
-          :postal_code => '60654'
+      shipping: {
+        name: 'Joe Public',
+        address: {
+          line1: '222 W Merchandise Mart Plaza',
+          city: 'Chicago',
+          state: 'IL',
+          country: 'US',
+          postal_code: '60654'
         }
       }
     )
