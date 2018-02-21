@@ -3,7 +3,7 @@ class ShippoService
   def initialize(options = {})
     @address_from = options.fetch(:address_from, fake_address_from)
     @address_to = options.fetch(:address_to, fake_address_to)
-    @parcel = options[:items] ? create_parcel(items) : fake_parcel
+    @parcel = options[:items] ? create_parcel(options.fetch(:items)) : fake_parcel
   end
 
   def create_shipment
@@ -16,10 +16,7 @@ class ShippoService
   end
 
   def create_rates
-    shipment = create_shipment
-    rates = convert_rates(shipment.rates)
-    rates.unshift(pick_up_option)
-    rates
+    convert_rates(create_shipment.rates).unshift(pick_up_option)
   end
 
   def convert_rates(rates)
@@ -77,7 +74,20 @@ class ShippoService
     }
   end
 
+  def get_weight(items)
+    items.map do |item|
+      item['parent']['product']['package_dimensions']['weight'].to_f
+    end .reduce(&:+)
+  end
+
   def create_parcel(items)
-    { items: items }
+    {
+      length: 5,
+      width: 5,
+      height: 5,
+      distance_unit: :in,
+      weight: get_weight(items),
+      mass_unit: :oz # Make sure that the unit is not lbs
+    }
   end
 end
